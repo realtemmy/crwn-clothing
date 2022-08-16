@@ -5,13 +5,13 @@ import { CardContext } from "../../contexts/card-context";
 import "./cart-icon.styles.scss";
 
 const CartIcon = () => {
-  const { isCartOpen, setCartOpen, cartItems } = useContext(CardContext);
-  const { count } = cartItems
+  const { isCartOpen, setCartOpen, cartCount } = useContext(CardContext);
+
   const toggleDropDown = () => setCartOpen(!isCartOpen);
   return (
     <div className="cart-icon-container">
       <ShoppingIcon className="shopping-icon" onClick={toggleDropDown} />
-      <span className="item-count">{count}</span>
+      <span className="item-count">{cartCount}</span>
     </div>
   );
 };
