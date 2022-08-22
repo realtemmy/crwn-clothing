@@ -32,6 +32,8 @@ const removeCartItem = (cartItems, cartItemToRemove) => {
 
 const deleteCartItem = (cartItems, cartItemTodelete) =>
   cartItems.filter((cartItem) => cartItem.id !== cartItemTodelete.id);
+
+
 export const CardContext = createContext({
   isCartOpen: false,
   setCartOpen: () => {},
