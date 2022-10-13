@@ -1,11 +1,14 @@
 import { useState} from "react";
+import { useDispatch } from "react-redux";
 import {
-  signInWIthGooglePopup,
-  SignInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase";
-
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
+
+import {
+  googleSignInStart,
+  emailSignInstart,
+} from "../../store/user/user-action";
 
 import { SignInContainer, ButtonsContainer } from "./sign-in-form.style";
 
@@ -15,6 +18,7 @@ const defaultdatafield = {
 };
 
 const SignInForm = () => {
+  const dispatch = useDispatch()
   const [data, setdata] = useState(defaultdatafield);
   const { email, password } = data;
 
@@ -24,7 +28,7 @@ const SignInForm = () => {
   };
 
   const signInWithGoogle = async () => {
-    await signInWIthGooglePopup();
+    dispatch(googleSignInStart())
   };
 
   const handleChange = (e) => {
@@ -37,29 +41,10 @@ const SignInForm = () => {
     e.preventDefault();
 
     try {
-      await SignInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
+      dispatch(emailSignInstart(email, password))
       resetFormFields();
     } catch (error) {
-      switch (error.code) {
-        case "auth/wrong-password":
-          alert("Wrong password");
-          break;
-
-        case "auth/user-not-found":
-          alert("Email does not exist");
-          break;
-        case "auth/network-request-failed":
-          alert("Please check your internet connection");
-          break;
-
-        default:
-          alert("An error occured, please recheck info");
-          console.log(error);
-          break;
-      }
+      console.log('user sign in failed', error);
     }
   };
 
