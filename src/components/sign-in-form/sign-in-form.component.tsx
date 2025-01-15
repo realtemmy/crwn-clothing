@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useState, FormEvent, ChangeEvent} from "react";
 import { useDispatch } from "react-redux";
 import {
 } from "../../utils/firebase/firebase";
@@ -31,14 +31,14 @@ const SignInForm = () => {
     dispatch(googleSignInStart())
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
 
     setdata({ ...data, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
     try {
       dispatch(emailSignInstart(email, password))

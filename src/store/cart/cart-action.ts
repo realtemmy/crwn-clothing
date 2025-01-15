@@ -73,7 +73,7 @@ export const addItemToCart = (
   productToAdd: CategoryItem
 ) => {
   const newCartItems = addCartItem(cartItems, productToAdd);
-  setCartItems(newCartItems);
+  return setCartItems(newCartItems);
 };
 
 export const removeCartInItem = (
@@ -81,7 +81,7 @@ export const removeCartInItem = (
   cartItemToRemove: CartItem
 ) => {
   const newCartItems = removeCartItem(cartItems, cartItemToRemove);
-  setCartItems(newCartItems);
+  return setCartItems(newCartItems);
 };
 
 export const deleteCart = (
@@ -89,7 +89,7 @@ export const deleteCart = (
   cartItemTodelete: CartItem
 ) => {
   const newCartItems = deleteCartItem(cartItems, cartItemTodelete);
-  setCartItems(newCartItems);
+  return setCartItems(newCartItems);
 };
 
 export const setCartOpen = withMatcher(
